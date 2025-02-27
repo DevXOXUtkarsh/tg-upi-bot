@@ -1,0 +1,24 @@
+name: Run Telegram Bot
+
+on:
+  push:
+  schedule:
+    - cron: "0 */12 * * *"  # Runs every 12 hours to keep bot alive
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set Up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: "3.9"
+
+      - name: Install Dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Telegram Bot
+        run: python bot.py
